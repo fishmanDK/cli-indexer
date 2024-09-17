@@ -13,15 +13,6 @@ var rpcURL string
 var startBlock int64
 var outputFile string
 
-// var rootCmd = &cobra.Command{
-// 	Use:   "indexer",
-// 	Short: "Indexer CLI application",
-// 	Long:  "A simple CLI application for indexing blocks.",
-// 	Run: func(cmd *cobra.Command, args []string) {
-// 		fmt.Println("Indexer application running...")
-// 	},
-// }
-
 var rootCmd = &cobra.Command{
 	Use:   "indexer run",
 	Short: "Run the indexer",

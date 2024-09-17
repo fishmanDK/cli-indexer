@@ -1,3 +1,4 @@
+version: 2
 builds:
   - binary: cliindexer
     goos:
@@ -17,16 +18,16 @@ release:
 universal_binaries:
   - replace: true
 
-brews:
-  -
-    name: cli-indexer
-    homepage: https://github.com/fishmanDK/cli-indexer
-    tap:
-      owner: fishmanDK
-      name: homebrew-cli-indexer
-    commit_author:
-      name: fishmanDK
-      email: denis.23weer@gmail.com
+publish:
+  brews:
+    - name: cli-indexer
+      homepage: https://github.com/fishmanDK/cli-indexer
+      tap:
+        owner: fishmanDK
+        name: homebrew-cli-indexer
+      commit_author:
+        name: fishmanDK
+        email: denis.23weer@gmail.com
 
-checksum:
-  name_template: 'checksums.txt'
+checksums:
+  - name_template: 'checksums.txt'

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/fishmanDK/cli-indexer/indexer"
@@ -25,6 +26,10 @@ var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run the indexer",
 	Run: func(cmd *cobra.Command, args []string) {
+		if rpcURL == "" || startBlock < 0 || outputFile == ""{
+			log.Fatal("all flags must be specified")
+		}
+
 		if err := indexer.RunIndexer(rpcURL, startBlock, outputFile); err != nil {
 			fmt.Printf("Error running indexer: %v\n", err)
 			os.Exit(1)

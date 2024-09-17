@@ -13,17 +13,17 @@ var rpcURL string
 var startBlock int64
 var outputFile string
 
-var rootCmd = &cobra.Command{
-	Use:   "indexer",
-	Short: "Indexer CLI application",
-	Long:  "A simple CLI application for indexing blocks.",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Indexer application running...")
-	},
-}
+// var rootCmd = &cobra.Command{
+// 	Use:   "indexer",
+// 	Short: "Indexer CLI application",
+// 	Long:  "A simple CLI application for indexing blocks.",
+// 	Run: func(cmd *cobra.Command, args []string) {
+// 		fmt.Println("Indexer application running...")
+// 	},
+// }
 
-var runCmd = &cobra.Command{
-	Use:   "run",
+var rootCmd = &cobra.Command{
+	Use:   "indexer run",
 	Short: "Run the indexer",
 	Run: func(cmd *cobra.Command, args []string) {
 		if rpcURL == "" || startBlock < 0 || outputFile == ""{
@@ -38,10 +38,9 @@ var runCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(runCmd)
-	runCmd.Flags().StringVar(&rpcURL, "rpc", "", "RPC URL for Ethereum client")
-	runCmd.Flags().Int64Var(&startBlock, "start", 0, "Starting block number")
-	runCmd.Flags().StringVar(&outputFile, "out", "./logs/blocks.log", "Output file for blocks")
+	rootCmd.Flags().StringVar(&rpcURL, "rpc", "", "RPC URL for Ethereum client")
+	rootCmd.Flags().Int64Var(&startBlock, "start", 0, "Starting block number")
+	rootCmd.Flags().StringVar(&outputFile, "out", "./logs/blocks.log", "Output file for blocks")
 }
 
 func Execute() error {

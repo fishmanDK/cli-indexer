@@ -146,23 +146,9 @@ func RunIndexer(rpcURL string, startBlock int64, outputFile string) error {
 		return err
 	}
 
-	var fileBlocksLog *os.File
-	_, err = os.Stat(outputFile)
+	fileBlocksLog, err := os.Create("./logs/blocks.log")
 	if err != nil {
-		if os.IsNotExist(err) {
-			fmt.Printf("no such file: %v\n", err)
-			fileBlocksLog, err = os.Create("./logs/blocks.log")
-			if err != nil {
-				return fmt.Errorf("failed to create file: %v", err)
-			}
-		} else {
-			return err
-		}
-	} else {
-		fileBlocksLog, err = os.Open(outputFile)
-		if err != nil {
-			return fmt.Errorf("failed open file: %v", err)
-		}
+		return fmt.Errorf("failed to create file: %v", err)
 	}
 	defer fileBlocksLog.Close()
 	fileErrorsLog, err := os.Create("./logs/errors.log")

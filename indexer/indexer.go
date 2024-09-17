@@ -151,7 +151,7 @@ func RunIndexer(rpcURL string, startBlock int64, outputFile string) error {
 		return fmt.Errorf("failed to create file: %v", err)
 	}
 	defer fileBlocksLog.Close()
-	fileErrorsLog, err := os.Create("./logs/errors.log")
+	fileErrorsLog, err := os.Open("./logs/errors.log")
 	if err != nil {
 		return fmt.Errorf("failed to create file: %s", "errors.log")
 	}

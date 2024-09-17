@@ -21,11 +21,6 @@ func RunIndexer(rpcURL string, startBlock int64, outputFile string) error {
 		return fmt.Errorf("failed to create file: %v", err)
 	}
 	defer fileBlocksLog.Close()
-	fileErrorsLog, err := os.Open("./logs/errors.log")
-	if err != nil {
-		return fmt.Errorf("failed to open file errors.log: %v", err)
-	}
-	defer fileErrorsLog.Close()
 
 	lastBlock, err := client.BlockNumber(context.Background())
 	if err != nil {

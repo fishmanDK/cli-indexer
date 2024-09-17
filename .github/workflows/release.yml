@@ -1,36 +1,22 @@
-name: goreleaser
+version: 2
+clean:
+  directories:
+    - "dist"
+    - "bin"
+    - ".goreleaser"
 
-on:
-  push:
-    tags:
-      - "*"
+skaffold:
+  build:
+    context: .
+    artifacts:
+      - image: myapp:latest
+        dockerfile: Dockerfile
+        push: true
 
-permissions:
-  contents: write
-
-jobs:
-  goreleaser:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      -
-        name: Fetch all tags
-        run: git fetch --force --tags
-      -
-        name: Set up Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.17
-      -
-        name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v4
-        with:
-          distribution: goreleaser
-          version: latest  
-          args: release 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+publish:
+  github:
+    owner: fishmanDK
+    repo: denis.23weer@gmail.com
+    token: $GITHUB_TOKEN
+    draft: false
+    prerelease: false
